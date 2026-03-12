@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-require('dotenv').config({ path: '../.env' });  // Load from parent folder
+require('dotenv').config();  // Load from parent folder
 
 async function sendTestEmail() {
   try {

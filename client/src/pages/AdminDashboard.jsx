@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const statusColors = {
-  'pending': 'secondary',
-  'in-progress': 'warning',
-  'resolved': 'success'
-};
+const API_BASE_URL = 'http://localhost:5000';
 
+const statusColors = {
+  pending: 'secondary',
+  'in-progress': 'warning',
+  resolved: 'success'
+};
 const AdminDashboard = () => {
     const [complaints, setComplaints] = useState({ pending: [], inProgress: [], resolved: [] });
     const [staffList, setStaffList] = useState([]);
@@ -25,8 +26,7 @@ const AdminDashboard = () => {
     const fetchComplaints = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('https://campus-complaint-system.onrender.com/api/complaints', {
-                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+           const res = await axios.get(`${API_BASE_URL}/api/complaints`, {
             });
             setComplaints(res.data);
         } catch (err) {
@@ -37,7 +37,7 @@ const AdminDashboard = () => {
 
     const fetchStaff = async () => {
         try {
-            const res = await axios.get('https://campus-complaint-system.onrender.com/api/auth/staff', {
+            const res = await axios.get(`${API_BASE_URL}/api/auth/staff`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             console.log('Staff data received:', res.data);
@@ -56,7 +56,7 @@ const AdminDashboard = () => {
                 return;
             }
             
-            await axios.put(`https://campus-complaint-system.onrender.com/api/complaints/${complaintId}/assign`, { staffId }, {
+           await axios.put(`${API_BASE_URL}/api/complaints/${complaintId}/assign`, { staffId }, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             console.log(`Complaint ${complaintId} assigned to staff ${staffId}`);
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
     };
 
     const handleStatusUpdate = async (complaintId) => {
-        await axios.put(`https://campus-complaint-system.onrender.com/api/complaints/${complaintId}/status`, {
+       await axios.put(`${API_BASE_URL}/api/complaints/${complaintId}/status`, { 
             status: statusEdit[complaintId],
             resolutionNotes: notesEdit[complaintId]
         }, {
