@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../../api/auth';
+import { API_BASE_URL } from '../../api/auth';
 
 
 const ComplaintForm = () => {

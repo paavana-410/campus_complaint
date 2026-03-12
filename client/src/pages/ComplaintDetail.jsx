@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import API_BASE_URL from '../api/auth';
+import { API_BASE_URL } from '../api/auth';
 
 const res = await axios.get(`${API_BASE_URL}/api/feedback`);
 const [complaintsRes, usersRes] = await Promise.all([

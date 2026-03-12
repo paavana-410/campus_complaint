@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import logo from '../assets/logo.jpeg'; // Add your logo to client/src/assets/
+import logo from '../assets/m.jpg'; // Add your logo to client/src/assets/
 
 const Navbar = ({ isLoggedIn, onLogout, userRole, userEmail, userInfo }) => {
     const history = useHistory();

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import API_BASE_URL from '../../api/auth';
+import { API_BASE_URL } from '../../api/auth';
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
