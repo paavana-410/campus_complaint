@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../api/auth';
 
-const API_BASE_URL = 'http://localhost:5000';
+
 
 const statusColors = {
   pending: 'secondary',

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import collegeImage from '../assets/m.jpg';
-
-const API_BASE_URL = 'http://localhost:5000';
+import API_BASE_URL from '../api/auth';
 
 const Home = ({ userEmail, userRole }) => {
   const history = useHistory();

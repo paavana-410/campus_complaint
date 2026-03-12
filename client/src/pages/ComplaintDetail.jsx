@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../api/auth';
 
-const API_BASE_URL = 'http://localhost:5000';
 const res = await axios.get(`${API_BASE_URL}/api/feedback`);
 const [complaintsRes, usersRes] = await Promise.all([
   axios.get(`${API_BASE_URL}/api/stats/complaints`),
