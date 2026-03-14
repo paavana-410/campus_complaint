@@ -74,11 +74,11 @@ const Home = ({ userEmail, userRole }) => {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6">
-              <h1 className="display-4 fw-bold mb-4">Smart Campus Complaint System</h1>
+              <h1 className="display-4 fw-bold mb-4">College Campus Complaint System</h1>
               <h3 className="mb-4" style={{ color: '#FFD700' }}>
-                Ramaiah Institute of Technology
+                M S Ramaiah Institute Of Technology
               </h3>
-              <p className="lead mb-4">
+              <p className="lead mb-4" style={{ color: '#fff' }}>
                 Empowering students, staff, and administrators with a transparent
                 and efficient complaint management system. Experience seamless issue
                 resolution and real-time tracking.
@@ -112,7 +112,7 @@ const Home = ({ userEmail, userRole }) => {
             <div className="col-lg-6 text-center mt-4 mt-lg-0">
               <img
                 src={collegeImage}
-                alt="Ramaiah Institute of Technology"
+                alt="M S Ramaiah Institute Of Technology"
                 className="img-fluid rounded shadow-lg"
                 style={{
                   maxHeight: '400px',
@@ -351,81 +351,192 @@ const Home = ({ userEmail, userRole }) => {
       </div>
 
       <footer className="bg-dark text-white py-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-4 mb-4">
-              <h5 className="mb-3" style={{ color: '#FFD700' }}>
-                Ramaiah Institute of Technology
-              </h5>
-              <p className="mb-3">
-                Empowering students with innovative technology solutions for a
-                better campus experience.
-              </p>
-              <div className="d-flex gap-3">
-                <button className="btn btn-link text-white p-0 border-0 bg-transparent">
-                  <i className="fab fa-facebook-f"></i>
-                </button>
-                <button className="btn btn-link text-white p-0 border-0 bg-transparent">
-                  <i className="fab fa-twitter"></i>
-                </button>
-                <button className="btn btn-link text-white p-0 border-0 bg-transparent">
-                  <i className="fab fa-linkedin-in"></i>
-                </button>
-                <button className="btn btn-link text-white p-0 border-0 bg-transparent">
-                  <i className="fab fa-instagram"></i>
-                </button>
-              </div>
-            </div>
+  <div className="container">
+    <div className="row">
+      <div className="col-lg-4 mb-4">
+        <h5 className="mb-3" style={{ color: '#FFD700' }}>
+          M S Ramaiah Institute Of Technology
+        </h5>
+        <p className="mb-3">
+          Empowering students with innovative technology solutions for a better campus experience.
+        </p>
 
-            <div className="col-lg-2 col-md-6 mb-4">
-              <h6 className="mb-3" style={{ color: '#FFD700' }}>
-                Quick Links
-              </h6>
-              <ul className="list-unstyled">
-                <li><button className="btn btn-link text-white-50 text-decoration-none p-0 border-0 bg-transparent">About Us</button></li>
-                <li><button className="btn btn-link text-white-50 text-decoration-none p-0 border-0 bg-transparent">Contact</button></li>
-                <li><button className="btn btn-link text-white-50 text-decoration-none p-0 border-0 bg-transparent">Help Center</button></li>
-                <li><button className="btn btn-link text-white-50 text-decoration-none p-0 border-0 bg-transparent">Privacy Policy</button></li>
-              </ul>
-            </div>
+        <div className="d-flex gap-3">
+          <a
+            href="https://www.facebook.com/RamaiahInstituteofTechnologyRIT/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white"
+            aria-label="MSRIT Facebook"
+          >
+            <i className="fab fa-facebook-f"></i>
+          </a>
 
-            <div className="col-lg-3 col-md-6 mb-4">
-              <h6 className="mb-3" style={{ color: '#FFD700' }}>
-                Departments
-              </h6>
-              <ul className="list-unstyled">
-                <li><button className="btn btn-link text-white-50 text-decoration-none p-0 border-0 bg-transparent">Computer Science</button></li>
-                <li><button className="btn btn-link text-white-50 text-decoration-none p-0 border-0 bg-transparent">Information Science</button></li>
-                <li><button className="btn btn-link text-white-50 text-decoration-none p-0 border-0 bg-transparent">Mechanical Engineering</button></li>
-                <li><button className="btn btn-link text-white-50 text-decoration-none p-0 border-0 bg-transparent">Electrical Engineering</button></li>
-              </ul>
-            </div>
+          <a
+            href="https://x.com/msrit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white"
+            aria-label="MSRIT X"
+          >
+            <i className="fab fa-twitter"></i>
+          </a>
 
-            <div className="col-lg-3 mb-4">
-              <h6 className="mb-3" style={{ color: '#FFD700' }}>
-                Contact Info
-              </h6>
-              <p className="mb-2">
-                <i className="fas fa-map-marker-alt me-2"></i>Bengaluru, Karnataka
-              </p>
-              <p className="mb-2">
-                <i className="fas fa-envelope me-2"></i>info@msrit.edu
-              </p>
-            </div>
-          </div>
+          <a
+            href="https://in.linkedin.com/school/m.s.-ramaiah-institute-of-technology/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white"
+            aria-label="MSRIT LinkedIn"
+          >
+            <i className="fab fa-linkedin-in"></i>
+          </a>
 
-          <hr className="my-4" />
-
-          <div className="row align-items-center">
-            <div className="col-md-6">
-              <p className="mb-0">&copy; 2025 Ramaiah Institute of Technology. All rights reserved.</p>
-            </div>
-            <div className="col-md-6 text-md-end">
-              <p className="mb-0">Smart Campus Complaint System v1.0</p>
-            </div>
-          </div>
+          <a
+            href="https://www.instagram.com/msrit_official/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white"
+            aria-label="MSRIT Instagram"
+          >
+            <i className="fab fa-instagram"></i>
+          </a>
         </div>
-      </footer>
+      </div>
+
+      <div className="col-lg-2 col-md-6 mb-4">
+        <h6 className="mb-3" style={{ color: '#FFD700' }}>Quick Links</h6>
+        <ul className="list-unstyled">
+          <li className="mb-2">
+            <a
+              href="https://www.msrit.edu/about-us.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white-50 text-decoration-none"
+            >
+              About Us
+            </a>
+          </li>
+          <li className="mb-2">
+            <a
+              href="https://www.msrit.edu/contact-us.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white-50 text-decoration-none"
+            >
+              Contact
+            </a>
+          </li>
+          <li className="mb-2">
+            <a
+              href="https://www.msrit.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white-50 text-decoration-none"
+            >
+              Help Center
+            </a>
+          </li>
+          <li className="mb-2">
+            <a
+              href="https://www.msrit.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white-50 text-decoration-none"
+            >
+              Privacy Policy
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div className="col-lg-3 col-md-6 mb-4">
+        <h6 className="mb-3" style={{ color: '#FFD700' }}>Departments</h6>
+        <ul className="list-unstyled">
+          <li className="mb-2">
+            <a
+              href="https://www.msrit.edu/department/cse.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white-50 text-decoration-none"
+            >
+              Computer Science
+            </a>
+          </li>
+          <li className="mb-2">
+            <a
+              href="https://www.msrit.edu/department/ise.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white-50 text-decoration-none"
+            >
+              Information Science
+            </a>
+          </li>
+          <li className="mb-2">
+            <a
+              href="https://www.msrit.edu/department/me.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white-50 text-decoration-none"
+            >
+              Mechanical Engineering
+            </a>
+          </li>
+          <li className="mb-2">
+            <a
+              href="https://www.msrit.edu/department/eee.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white-50 text-decoration-none"
+            >
+              Electrical Engineering
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div className="col-lg-3 mb-4">
+        <h6 className="mb-3" style={{ color: '#FFD700' }}>Contact Info</h6>
+        <p className="mb-2">
+          <i className="fas fa-map-marker-alt me-2"></i>
+          MSR Nagar, MSRIT Post, Bangalore 560054, Karnataka
+        </p>
+        <p className="mb-2">
+          <i className="fas fa-envelope me-2"></i>
+          <a
+            href="mailto:principal@msrit.edu"
+            className="text-white text-decoration-none"
+          >
+            principal@msrit.edu
+          </a>
+        </p>
+        <p className="mb-2">
+          <i className="fas fa-envelope me-2"></i>
+          <a
+            href="mailto:admn@msrit.edu"
+            className="text-white text-decoration-none"
+          >
+            admn@msrit.edu
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <hr className="my-4" />
+
+    <div className="row align-items-center">
+      <div className="col-md-6">
+        <p className="mb-0">
+          &copy; 2025 M S Ramaiah Institute Of Technology. All rights reserved.
+        </p>
+      </div>
+      <div className="col-md-6 text-md-end">
+        <p className="mb-0">College Campus Complaint System v1.0</p>
+      </div>
+    </div>
+  </div>
+</footer>
     </div>
   );
 };

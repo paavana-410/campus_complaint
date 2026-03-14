@@ -18,8 +18,8 @@ const Navbar = ({ isLoggedIn, onLogout, userRole, userEmail, userInfo }) => {
         <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: 'var(--primary-blue)' }}>
             <div className="container-fluid">
                 <Link className="navbar-brand d-flex align-items-center" to="/">
-                    <img src={logo} alt="Kongu Engineering College" height="40" className="me-2" />
-                    <span style={{ fontWeight: 700, letterSpacing: 1 }}>Kongu Engineering College</span>
+                    <img src={logo} alt="M S Ramaiah Institute Of Technology" height="40" className="me-2" />
+                    <span style={{ fontWeight: 700, letterSpacing: 1 }}>M S Ramaiah Institute Of Technology</span>
                 </Link>
                 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

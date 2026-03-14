@@ -1,7 +1,7 @@
 {
   "name": "smart-campus-complaint-system",
   "version": "1.0.0",
-  "description": "Server-side for Smart Campus Complaint Management System",
+  "description": "Server-side for College Campus Complaint Management System",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

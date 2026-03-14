@@ -1,4 +1,4 @@
-<h1 align="center">Smart Campus Complaint System</h1>
+<h1 align="center">College Campus Complaint System</h1>
 
 <div align="center">
 
@@ -21,10 +21,10 @@
 <div align="center">
   <img 
     src="https://github.com/user-attachments/assets/48127d29-d387-4ce2-85cb-0a2356d05b18"
-    alt="Smart Campus Complaint System Landing Page"
+    alt="College Campus Complaint System Landing Page"
     width="900"
   />
-  <p><i>Smart Campus Complaint System – Landing Page</i></p>
+  <p><i>College Campus Complaint System – Landing Page</i></p>
 </div>
 
 
@@ -52,7 +52,7 @@
 
 ## 🎯 Overview
 
-Smart Campus Complaint System is a full-stack web application designed to streamline complaint management in educational institutions. The platform enables students to submit complaints with multimedia attachments, allows staff members to track and resolve assigned issues, and provides administrators with comprehensive oversight through analytics and management tools.
+College Campus Complaint System is a full-stack web application designed to streamline complaint management in educational institutions. The platform enables students to submit complaints with multimedia attachments, allows staff members to track and resolve assigned issues, and provides administrators with comprehensive oversight through analytics and management tools.
 
 The system implements a three-tier role-based access control (Student, Staff, Admin) with JWT authentication, real-time status updates, automated email notifications, and a feedback mechanism for continuous improvement.
 

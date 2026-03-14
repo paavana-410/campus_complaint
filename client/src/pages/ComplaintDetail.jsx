@@ -75,9 +75,9 @@ const Home = ({ userEmail, userRole }) => {
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-6">
-                            <h1 className="display-4 fw-bold mb-4">Smart Campus Complaint System</h1>
-                            <h3 className="mb-4" style={{ color: '#FFD700' }}>Kongu Engineering College</h3>
-                            <p className="lead mb-4">Empowering students, staff, and administrators with a transparent and efficient complaint management system. Experience seamless issue resolution and real-time tracking.</p>
+                            <h1 className="display-4 fw-bold mb-4">College Campus Complaint System</h1>
+                            <h3 className="mb-4" style={{ color: '#FFD700' }}>M S Ramaiah Institute Of Technology</h3>
+                            <p className="lead mb-4" style={{ color: '#fff' }}>Empowering students, staff, and administrators with a transparent and efficient complaint management system. Experience seamless issue resolution and real-time tracking.</p>
                         {!userEmail && (
                                 <div className="d-flex gap-3">
                                     <button className="btn btn-warning btn-lg px-4" onClick={() => history.push('/login/student')}>
@@ -267,7 +267,7 @@ const Home = ({ userEmail, userRole }) => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4 mb-4">
-                            <h5 className="mb-3" style={{ color: '#FFD700' }}>Kongu Engineering College</h5>
+                            <h5 className="mb-3" style={{ color: '#FFD700' }}>M S Ramaiah Institute Of Technology</h5>
                             <p className="mb-3">Empowering students with innovative technology solutions for a better campus experience.</p>
                             <div className="d-flex gap-3">
                                 <button className="btn btn-link text-white p-0 border-0 bg-transparent">
@@ -312,10 +312,10 @@ const Home = ({ userEmail, userRole }) => {
                     <hr className="my-4" />
                     <div className="row align-items-center">
                         <div className="col-md-6">
-                            <p className="mb-0">&copy; 2025 Kongu Engineering College. All rights reserved.</p>
+                            <p className="mb-0">&copy; 2025 M S Ramaiah Institute Of Technology. All rights reserved.</p>
                         </div>
                         <div className="col-md-6 text-md-end">
-                            <p className="mb-0">Smart Campus Complaint System v1.0</p>
+                            <p className="mb-0">College Campus Complaint System v1.0</p>
                         </div>
                     </div>
                 </div>
