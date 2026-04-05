@@ -1,0 +1,21 @@
+# Prometheus ServiceMonitor to scrape the campus server metrics
+# This requires the Prometheus Operator CRD (installed via kube-prometheus-stack Helm chart)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: campus-server-monitor
+  namespace: monitoring
+  labels:
+    release: prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+    - default
+  selector:
+    matchLabels:
+      app: server
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 15s
+    scheme: http
