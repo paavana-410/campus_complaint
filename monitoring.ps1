@@ -38,8 +38,7 @@ Write-Host "[3/5] Installing/Updating kube-prometheus-stack (this takes 3-5 minu
 helm upgrade --install prometheus prometheus-community/kube-prometheus-stack `
     -n monitoring `
     -f "$ProjectRoot\k8s\monitoring\prometheus-values.yaml" `
-    --create-namespace `
-    --atomic --wait --timeout=600s
+    --create-namespace
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "  Helm deployment failed." -ForegroundColor Red
