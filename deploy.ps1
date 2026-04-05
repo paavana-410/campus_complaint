@@ -6,7 +6,7 @@ param(
     [switch]$Clean
 )
 
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 Write-Host ""
