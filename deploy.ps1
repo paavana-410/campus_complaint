@@ -21,6 +21,10 @@ $minikubeStatus = minikube status --format='{{.Host}}' 2>&1
 if ($minikubeStatus -notmatch "Running") {
     Write-Host "  Starting Minikube..." -ForegroundColor White
     minikube start --driver=docker --memory=2500 --cpus=2 --docker-opt dns=8.8.8.8 --docker-opt dns=8.8.4.4
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "  Error: Failed to start Minikube. Exiting." -ForegroundColor Red
+        exit $LASTEXITCODE
+    }
 } else {
     Write-Host "  Minikube already running." -ForegroundColor Green
 }
@@ -28,12 +32,21 @@ if ($minikubeStatus -notmatch "Running") {
 # Step 2: Enable Nginx Ingress addon
 Write-Host "[2/7] Enabling Nginx Ingress addon..." -ForegroundColor Yellow
 minikube addons enable ingress
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "  Error: Failed to enable ingress addon. Exiting." -ForegroundColor Red
+    exit $LASTEXITCODE
+}
 Start-Sleep -Seconds 5
 Write-Host "  Ingress addon enabled." -ForegroundColor Green
 
 # Step 3: Set Docker to use Minikube's Docker daemon
 Write-Host "[3/7] Pointing Docker to Minikube daemon..." -ForegroundColor Yellow
-& minikube -p minikube docker-env --shell powershell | Invoke-Expression
+$dockerEnvOut = minikube -p minikube docker-env --shell powershell 2>&1
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "  Error: Failed to get docker-env from minikube. Output: $dockerEnvOut" -ForegroundColor Red
+    exit 1
+}
+$dockerEnvOut | Invoke-Expression
 Write-Host "  Docker now builds inside Minikube." -ForegroundColor Green
 
 # Step 4: Build Docker images
