@@ -20,8 +20,8 @@ spec:
     spec:
       containers:
       - name: server
-        image: campus-server:latest
-        imagePullPolicy: Never
+        image: paavana26/campus-server:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
         envFrom:

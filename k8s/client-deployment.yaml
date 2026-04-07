@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: client
-        image: campus-client:latest
-        imagePullPolicy: Never
+        image: paavana26/campus-client:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:
