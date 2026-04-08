@@ -28,7 +28,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./server
-          platforms: linux/arm64
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/campus-server:latest
 
@@ -36,21 +35,5 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./client
-          platforms: linux/arm64
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/campus-client:latest
-
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Kubernetes Context
-        uses: azure/k8s-set-context@v3
-        with:
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-
-      - name: Deploy to Cloud
-        run: kubectl apply -f k8s/
