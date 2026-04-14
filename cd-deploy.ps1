@@ -44,7 +44,9 @@ Write-Host ''
 
 # -- Step 1: Verify Minikube is running -----------------------
 Write-Host '[1/6] Checking Minikube status...' -ForegroundColor Yellow
+$ErrorActionPreference = 'Continue'
 $minikubeStatus = minikube status --format='{{.Host}}' 2>&1
+$ErrorActionPreference = 'Stop'
 if ($minikubeStatus -notmatch 'Running') {
     Write-Host '  Minikube is NOT running. Starting it...' -ForegroundColor Red
     minikube start --memory=2500 --cpus=2
