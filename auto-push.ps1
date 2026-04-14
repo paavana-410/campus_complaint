@@ -19,8 +19,16 @@ git add .
 Write-Host "Committing changes..." -ForegroundColor Green
 git commit -m "$CommitMessage"
 
-# 3. Push to remote
+# 3. Pull latest changes from remote to avoid conflicts
+Write-Host "Pulling latest changes from remote..." -ForegroundColor Green
+git pull --rebase
+
+# 4. Push to remote
 Write-Host "Pushing to remote repository..." -ForegroundColor Green
 git push
 
-Write-Host "Git operations completed successfully!" -ForegroundColor Cyan
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "Git operations completed successfully!" -ForegroundColor Cyan
+} else {
+    Write-Host "There was an error pushing your code. Please check the output above." -ForegroundColor Red
+}
