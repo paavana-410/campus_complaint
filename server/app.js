@@ -134,13 +134,18 @@ app.get('/api/debug/routes', (req, res) => {
     res.json({ routes });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log('Available routes:');
-    console.log('- GET /api/test');
-    console.log('- GET /api/stats/complaints');
-    console.log('- GET /api/stats/users');
-    console.log('- GET /api/auth/stats');
-    console.log('- GET /api/complaints/stats');
-});
+// Export app for testing
+module.exports = app;
+
+// Start server only if not in test environment
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+        console.log('Available routes:');
+        console.log('- GET /api/test');
+        console.log('- GET /api/stats/complaints');
+        console.log('- GET /api/stats/users');
+        console.log('- GET /api/auth/stats');
+        console.log('- GET /api/complaints/stats');
+    });
+}
