@@ -27,11 +27,11 @@ $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 if ($Namespace -eq "staging") {
     $AppUrl    = "http://staging.campus.local"
     $BgColor   = "DarkYellow"
-    $EnvLabel  = "🚦 STAGING"
+    $EnvLabel  = "[STAGING]"
 } else {
     $AppUrl    = "http://campus.local"
     $BgColor   = "Green"
-    $EnvLabel  = "🚀 PRODUCTION"
+    $EnvLabel  = "[PRODUCTION]"
 }
 
 # ── Banner ────────────────────────────────────────────────────
@@ -50,7 +50,7 @@ if ($minikubeStatus -notmatch "Running") {
     minikube start --driver=docker --memory=2500 --cpus=2
     if ($LASTEXITCODE -ne 0) { Write-Host "  ERROR: Could not start Minikube." -ForegroundColor Red; exit 1 }
 } else {
-    Write-Host "  ✅ Minikube is running." -ForegroundColor Green
+    Write-Host "  OK Minikube is running." -ForegroundColor Green
 }
 
 # ── Step 2: Ensure namespace exists ──────────────────────────
@@ -59,9 +59,9 @@ Write-Host "[2/6] Ensuring namespace '$Namespace' exists..." -ForegroundColor Ye
 $nsExists = kubectl get namespace $Namespace 2>&1
 if ($LASTEXITCODE -ne 0) {
     kubectl create namespace $Namespace
-    Write-Host "  ✅ Namespace '$Namespace' created." -ForegroundColor Green
+    Write-Host "  OK Namespace '$Namespace' created." -ForegroundColor Green
 } else {
-    Write-Host "  ✅ Namespace '$Namespace' already exists." -ForegroundColor Green
+    Write-Host "  OK Namespace '$Namespace' already exists." -ForegroundColor Green
 }
 
 # ── Step 3: Pull latest images from Docker Hub ───────────────
@@ -80,7 +80,7 @@ if ($LASTEXITCODE -ne 0) { Write-Host "  ERROR: Failed to pull campus-server." -
 docker pull "$DockerUser/campus-client:latest"
 if ($LASTEXITCODE -ne 0) { Write-Host "  ERROR: Failed to pull campus-client." -ForegroundColor Red; exit 1 }
 
-Write-Host "  ✅ Images pulled." -ForegroundColor Green
+Write-Host "  OK Images pulled." -ForegroundColor Green
 
 # ── Step 4: Apply K8s manifests to the namespace ─────────────
 Write-Host ""
@@ -97,7 +97,7 @@ if ($Namespace -eq "staging") {
 } else {
     kubectl apply -f "$ProjectRoot\k8s\ingress.yaml" -n $Namespace
 }
-Write-Host "  ✅ Manifests applied." -ForegroundColor Green
+Write-Host "  OK Manifests applied." -ForegroundColor Green
 
 # ── Step 5: Rolling restart ───────────────────────────────────
 Write-Host ""
@@ -120,7 +120,7 @@ if ($LASTEXITCODE -ne 0) {
     Write-Host "    kubectl logs -l app=client -n $Namespace --tail=50" -ForegroundColor DarkRed
     exit 1
 }
-Write-Host "  ✅ Rolling update complete — new pods are live." -ForegroundColor Green
+Write-Host "  OK Rolling update complete - new pods are live." -ForegroundColor Green
 
 # ── Step 6: Summary ──────────────────────────────────────────
 Write-Host ""
@@ -140,11 +140,11 @@ Write-Host "  App URL     : $AppUrl" -ForegroundColor Cyan
 Write-Host ""
 
 if ($Namespace -eq "staging") {
-    Write-Host "  ⚡ TEST YOUR CHANGES AT: $AppUrl" -ForegroundColor DarkYellow
+    Write-Host "  >> TEST YOUR CHANGES AT: $AppUrl" -ForegroundColor DarkYellow
     Write-Host "  Then promote to production with:" -ForegroundColor Yellow
     Write-Host "    .\cd-deploy.ps1 -Namespace production" -ForegroundColor White
 } else {
-    Write-Host "  ⚡ If minikube tunnel is not running, open a new" -ForegroundColor Yellow
+    Write-Host "  >> If minikube tunnel is not running, open a new" -ForegroundColor Yellow
     Write-Host "     terminal and run:  minikube tunnel" -ForegroundColor Yellow
 }
 
