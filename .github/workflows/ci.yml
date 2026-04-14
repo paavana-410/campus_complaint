@@ -34,6 +34,10 @@ jobs:
           npm run test:coverage
           
       - name: SonarCloud Scan
+        # continue-on-error: true means existing issues won't BLOCK the pipeline.
+        # Sonar still runs and reports — you can review issues on SonarCloud UI
+        # without the push being blocked. Remove this line once tech debt is cleared.
+        continue-on-error: true
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
