@@ -47,7 +47,7 @@ Write-Host '[1/6] Checking Minikube status...' -ForegroundColor Yellow
 $minikubeStatus = minikube status --format='{{.Host}}' 2>&1
 if ($minikubeStatus -notmatch 'Running') {
     Write-Host '  Minikube is NOT running. Starting it...' -ForegroundColor Red
-    minikube start --driver=docker --memory=2500 --cpus=2
+    minikube start --memory=2500 --cpus=2
     if ($LASTEXITCODE -ne 0) { Write-Host '  ERROR: Could not start Minikube.' -ForegroundColor Red; exit 1 }
 } else {
     Write-Host '  Minikube is running.' -ForegroundColor Green
