@@ -51,7 +51,7 @@ const register = async (req, res) => {
         });
 
         await newUser.save();
-        const sanitizedEmail = String(email).replace(/[\r\n]/g, '');
+        const sanitizedEmail = String(email).replaceAll('\r', '').replaceAll('\n', '');
         console.log('User registered successfully:', { email: sanitizedEmail, role, name: name.trim(), department: department.trim() });
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
@@ -105,6 +105,7 @@ const login = async (req, res) => {
         );
         res.status(200).json({ token, user: { id: user._id, email: user.email, role: user.role, name: user.name } });
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ message: 'Server error' });
     }
 };
