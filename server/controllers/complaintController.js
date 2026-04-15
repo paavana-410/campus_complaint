@@ -1,7 +1,7 @@
 const Complaint = require('../models/Complaint');
 const User = require('../models/User');
 const { sendResolutionEmail } = require('../utils/mailer');
-const nodemailer = require('nodemailer');
+
 
 // Create a new complaint
 const createComplaint = async (req, res) => {
@@ -229,15 +229,7 @@ const getComplaintStats = async (req, res) => {
     }
 };
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+
 
 
 
