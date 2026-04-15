@@ -9,6 +9,8 @@ const feedbackRoutes = require('./routes/feedback');
 const statsRoutes = require('./routes/stats');
 
 const app = express();
+app.disable('x-powered-by'); // Hide Express version in headers
+
 const PORT = process.env.PORT || 5000;
 
 // Prometheus metrics setup
