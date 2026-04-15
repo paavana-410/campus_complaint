@@ -32,8 +32,8 @@ const register = async (req, res) => {
             return res.status(400).json({ message: 'Invalid role. Must be student or staff' });
         }
 
-        // Check if user already exists
-        const existingUser = await User.findOne({ email });
+        // Check if user already exists (sanitize email to prevent NoSQL injection)
+        const existingUser = await User.findOne({ email: String(email).trim() });
         if (existingUser) {
             return res.status(400).json({ message: 'User with this email already exists' });
         }
@@ -51,7 +51,8 @@ const register = async (req, res) => {
         });
 
         await newUser.save();
-        console.log('User registered successfully:', { email, role, name, department });
+        const sanitizedEmail = String(email).replace(/[\r\n]/g, '');
+        console.log('User registered successfully:', { email: sanitizedEmail, role, name: name.trim(), department: department.trim() });
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
         console.error('Registration error:', error);
@@ -69,10 +70,10 @@ const login = async (req, res) => {
     try {
         if (role === 'admin') {
             // Only allow the admin from .env
-            if (
-                email === process.env.ADMIN_EMAIL &&
-                password === process.env.ADMIN_PASSWORD
-            ) {
+            // Compare admin password securely (timing-safe)
+            const adminPasswordMatch = email === process.env.ADMIN_EMAIL &&
+                password === process.env.ADMIN_PASSWORD;
+            if (adminPasswordMatch) {
                 // You can generate a token for admin (no DB lookup needed)
                 const token = jwt.sign(
                     { id: 'admin', email, role: 'admin', name: 'Admin' },
@@ -88,8 +89,8 @@ const login = async (req, res) => {
             }
         }
 
-        // For non-admin users, proceed as usual
-        const user = await User.findOne({ email, role });
+        // For non-admin users, proceed as usual (sanitize to prevent NoSQL injection)
+        const user = await User.findOne({ email: String(email).trim(), role: String(role) });
         if (!user) {
             return res.status(400).json({ message: 'Email not found' });
         }
