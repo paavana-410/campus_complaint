@@ -76,8 +76,8 @@ const assignComplaint = async (req, res) => {
             return res.status(400).json({ message: 'Staff ID is required.' });
         }
         
-        // Check if staff exists and is actually a staff member
-        const staff = await User.findOne({ _id: staffId, role: 'staff' });
+        // Check if staff exists and is actually a staff member (sanitize to prevent NoSQL injection)
+        const staff = await User.findOne({ _id: String(staffId), role: 'staff' });
         if (!staff) {
             return res.status(400).json({ message: 'Invalid staff member selected.' });
         }
@@ -239,17 +239,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-transporter.sendMail({
-    from: 'YOUR_EMAIL@gmail.com',
-    to: 'YOUR_EMAIL@gmail.com',
-    subject: 'Test Email',
-    text: 'This is a test'
-}, (err, info) => {
-    if (err) {
-        return console.error('Error:', err);
-    }
-    console.log('Sent:', info.response);
-});
+
 
 module.exports = {
     createComplaint,
