@@ -7,7 +7,7 @@ const submitFeedback = async (req, res) => {
         const { complaintId, rating, comment } = req.body;
         // Find complaint and ensure it's resolved
         const complaint = await Complaint.findById(complaintId);
-        if (!complaint || complaint.status !== 'resolved') {
+        if (complaint?.status !== 'resolved') {
             return res.status(400).json({ message: 'Feedback can only be submitted for resolved complaints.' });
         }
         // Only allow feedback if user is the complaint owner
@@ -15,7 +15,7 @@ const submitFeedback = async (req, res) => {
             return res.status(403).json({ message: 'Not authorized to submit feedback for this complaint.' });
         }
         // Prevent duplicate feedback
-        const existing = await Feedback.findOne({ complaintId, userId: req.user.id });
+        const existing = await Feedback.findOne({ complaintId: String(complaintId), userId: req.user.id });
         if (existing) {
             return res.status(400).json({ message: 'Feedback already submitted for this complaint.' });
         }
