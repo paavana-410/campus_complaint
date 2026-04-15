@@ -1,6 +1,13 @@
 node_modules
 npm-debug.log
 build
-.git
-*.md
 .env
+.env.*
+.git
+.gitignore
+*.md
+coverage
+.vscode
+*.test.js
+docker-compose*.yml
+Dockerfile

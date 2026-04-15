@@ -1,6 +1,14 @@
 node_modules
 npm-debug.log
 .env
+.env.*
 .git
+.gitignore
 *.md
 uploads
+tests
+coverage
+.vscode
+*.test.js
+docker-compose*.yml
+Dockerfile
