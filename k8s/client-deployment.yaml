@@ -29,6 +29,7 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
+            ephemeral-storage: "250Mi"
         livenessProbe:
           httpGet:
             path: /
