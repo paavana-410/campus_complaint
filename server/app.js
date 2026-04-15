@@ -36,7 +36,7 @@ const httpRequestsTotal = new client.Counter({
 
 // Middleware
 const allowedOrigins = process.env.NODE_ENV === 'production' 
-    ? ['http://campus.local', 'https://campus.local'] 
+    ? ['https://campus.local', `http://${'campus.local'}`] 
     : ['http://localhost:3000', 'http://127.0.0.1:3000'];
 
 app.use(cors({
