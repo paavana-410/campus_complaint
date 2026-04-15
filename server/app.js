@@ -60,7 +60,8 @@ app.get('/metrics', async (req, res) => {
 
 // Debug middleware to log all requests
 app.use((req, res, next) => {
-    console.log(`${req.method} ${req.path}`);
+    const sanitizedPath = req.path.replace(/[\r\n]/g, '');
+    console.log(`${req.method} ${sanitizedPath}`);
     next();
 });
 
