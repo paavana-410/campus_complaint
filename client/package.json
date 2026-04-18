@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
     "axios": "^0.21.4",
     "bootstrap": "^5.3.7",
     "jwt-decode": "^4.0.0",
