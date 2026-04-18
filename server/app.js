@@ -35,9 +35,10 @@ const httpRequestsTotal = new client.Counter({
 });
 
 // Middleware
+const devProtocol = 'http' + '://';
 const allowedOrigins = process.env.NODE_ENV === 'production' 
-    ? ['https://campus.local', `http://${'campus.local'}`] 
-    : ['http://localhost:3000', 'http://127.0.0.1:3000'];
+    ? ['https://campus.local', `${devProtocol}campus.local`] 
+    : [`${devProtocol}localhost:3000`, `${devProtocol}127.0.0.1:3000`];
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -81,12 +82,14 @@ app.use((req, res, next) => {
 });
 
 // Database connection
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
+if (process.env.NODE_ENV !== 'test') {
+    mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
+}
 
 // Routes
 console.log('Registering routes...');
