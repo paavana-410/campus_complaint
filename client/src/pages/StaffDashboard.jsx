@@ -293,7 +293,7 @@ const StaffDashboard = () => {
                       {c.title}
                     </h6>
                     <span className={`badge bg-${statusColors[c.status] || 'secondary'}`}>
-                      {c.status && c.status.replace('-', ' ')}
+                      {c.status?.replace('-', ' ')}
                     </span>
                   </div>
                 </div>
@@ -358,7 +358,7 @@ const StaffDashboard = () => {
       </div>
 
       {selectedComplaint && (
-        <div className="modal show d-block" tabIndex="-1" role="dialog" style={{ background: 'rgba(0,0,0,0.5)' }}>
+        <dialog open className="modal show d-block" style={{ background: 'rgba(0,0,0,0.5)', width: '100%', border: 'none', padding: 0 }}>
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content">
               <div className="modal-header bg-primary text-white">
@@ -444,7 +444,7 @@ const StaffDashboard = () => {
                           <label className="form-label fw-bold">Previous Updates</label>
                           <div className="border rounded p-2" style={{ maxHeight: '200px', overflowY: 'auto' }}>
                             {selectedComplaint.staffUpdates.map((update, index) => (
-                              <div key={index} className="mb-2 p-2 bg-light rounded">
+                              <div key={update._id || index} className="mb-2 p-2 bg-light rounded">
                                 <small className="text-muted">
                                   {new Date(update.updatedAt).toLocaleString()}
                                 </small>
@@ -477,7 +477,7 @@ const StaffDashboard = () => {
               </form>
             </div>
           </div>
-        </div>
+        </dialog>
       )}
     </div>
   );

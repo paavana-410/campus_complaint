@@ -68,8 +68,9 @@ const ComplaintForm = () => {
 
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
-                                <label className="form-label">Title</label>
+                                <label htmlFor="complaintTitle" className="form-label">Title</label>
                                 <input
+                                    id="complaintTitle"
                                     type="text"
                                     className="form-control"
                                     value={title}
@@ -79,8 +80,9 @@ const ComplaintForm = () => {
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label">Description</label>
+                                <label htmlFor="complaintDesc" className="form-label">Description</label>
                                 <textarea
+                                    id="complaintDesc"
                                     className="form-control"
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
@@ -89,8 +91,9 @@ const ComplaintForm = () => {
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label">Category</label>
+                                <label htmlFor="complaintCategory" className="form-label">Category</label>
                                 <select
+                                    id="complaintCategory"
                                     className="form-select"
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
@@ -109,8 +112,9 @@ const ComplaintForm = () => {
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label">Due In</label>
+                                <label htmlFor="complaintDue" className="form-label">Due In</label>
                                 <select
+                                    id="complaintDue"
                                     className="form-select"
                                     value={dueInDays}
                                     onChange={(e) => setDueInDays(Number(e.target.value))}
@@ -122,8 +126,9 @@ const ComplaintForm = () => {
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label">Image (optional)</label>
+                                <label htmlFor="complaintImage" className="form-label">Image (optional)</label>
                                 <input
+                                    id="complaintImage"
                                     type="file"
                                     className="form-control"
                                     accept="image/*"

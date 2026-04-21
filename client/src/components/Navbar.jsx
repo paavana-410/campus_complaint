@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import logo from '../assets/m.jpg'; // Add your logo to client/src/assets/
 
 const Navbar = ({ isLoggedIn, onLogout, userRole, userEmail, userInfo }) => {
@@ -100,6 +101,17 @@ const Navbar = ({ isLoggedIn, onLogout, userRole, userEmail, userInfo }) => {
             </div>
         </nav>
     );
+};
+
+Navbar.propTypes = {
+    isLoggedIn: PropTypes.bool,
+    onLogout: PropTypes.func,
+    userRole: PropTypes.string,
+    userEmail: PropTypes.string,
+    userInfo: PropTypes.shape({
+        name: PropTypes.string,
+        department: PropTypes.string
+    })
 };
 
 export default Navbar;
