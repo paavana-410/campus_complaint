@@ -22,4 +22,6 @@ yarn-error.log*
 
 .vscode/
 k8s/secret.yaml  
- 
+coverage/
+server/coverage/
+client/coverage/
