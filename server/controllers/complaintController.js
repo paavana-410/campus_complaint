@@ -124,7 +124,7 @@ const updateComplaintStatus = async (req, res) => {
         }
 
         // Only send email if status is being set to "resolved" and raisedBy exists
-        if (status === 'resolved' && complaint.raisedBy && complaint.raisedBy.email) {
+        if (status === 'resolved' && complaint.raisedBy?.email) {
             try {
                 await sendResolutionEmail(complaint.raisedBy.email, 'Your complaint has been resolved', `Hello ${complaint.raisedBy.name},\n\nYour complaint titled "${complaint.title}" has been resolved.\n\nThank you.`);
                 console.log(`Resolution email sent to ${complaint.raisedBy.email}`);

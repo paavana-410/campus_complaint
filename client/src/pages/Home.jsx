@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import collegeImage from '../assets/m.jpg';
 import { API_BASE_URL } from '../api/auth';
@@ -318,7 +319,7 @@ const Home = ({ userEmail, userRole }) => {
                     </div>
 
                     <div className="mb-3">
-                      {[...Array(5)].map((_, i) => (
+                      {[...new Array(5)].map((_, i) => (
                         <i
                           key={i}
                           className={`fas fa-star ${
@@ -539,6 +540,11 @@ const Home = ({ userEmail, userRole }) => {
 </footer>
     </div>
   );
+};
+
+Home.propTypes = {
+  userEmail: PropTypes.string,
+  userRole: PropTypes.string
 };
 
 export default Home;

@@ -135,9 +135,9 @@ const StaffDashboard = () => {
   if (loading) {
     return (
       <div className="container py-5 text-center">
-        <div className="spinner-border text-primary" role="status">
+        <output className="spinner-border text-primary">
           <span className="visually-hidden">Loading...</span>
-        </div>
+        </output>
         <p className="mt-3">Loading your dashboard...</p>
       </div>
     );
@@ -225,8 +225,8 @@ const StaffDashboard = () => {
 
       <div className="row mb-4">
         <div className="col-md-4 mb-3">
-          <label className="form-label">Filter by Status</label>
-          <select className="form-select" value={filter} onChange={(e) => setFilter(e.target.value)}>
+          <label htmlFor="filterStatus" className="form-label">Filter by Status</label>
+          <select id="filterStatus" className="form-select" value={filter} onChange={(e) => setFilter(e.target.value)}>
             <option value="all">All Complaints</option>
             <option value="pending">Pending</option>
             <option value="in-progress">In Progress</option>
@@ -234,16 +234,17 @@ const StaffDashboard = () => {
           </select>
         </div>
         <div className="col-md-4 mb-3">
-          <label className="form-label">Sort By</label>
-          <select className="form-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <label htmlFor="sortBy" className="form-label">Sort By</label>
+          <select id="sortBy" className="form-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
             <option value="date">Date (Newest)</option>
             <option value="priority">Priority</option>
             <option value="title">Title</option>
           </select>
         </div>
         <div className="col-md-4 mb-3">
-          <label className="form-label">Search</label>
+          <label htmlFor="searchInput" className="form-label">Search</label>
           <input
+            id="searchInput"
             type="text"
             className="form-control"
             placeholder="Search complaints..."
@@ -425,8 +426,9 @@ const StaffDashboard = () => {
                       </div>
 
                       <div className="mb-3">
-                        <label className="form-label fw-bold">Progress Photo (optional)</label>
+                        <label htmlFor="progressPhoto" className="form-label fw-bold">Progress Photo (optional)</label>
                         <input
+                          id="progressPhoto"
                           type="file"
                           className="form-control"
                           accept="image/*"
