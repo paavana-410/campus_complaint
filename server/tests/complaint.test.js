@@ -4,6 +4,9 @@ const User = require('../models/User');
 const Complaint = require('../models/Complaint');
 const jwt = require('jsonwebtoken');
 
+// Mock environment variables for CI
+process.env.JWT_SECRET = 'test_secret_key';
+
 jest.mock('../models/User');
 jest.mock('../models/Complaint');
 jest.mock('jsonwebtoken');

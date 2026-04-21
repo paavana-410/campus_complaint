@@ -3,6 +3,9 @@ const app = require('../app');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
+// Mock environment variables for CI
+process.env.JWT_SECRET = 'test_secret_key';
+
 jest.mock('../models/User');
 jest.mock('bcryptjs');
 

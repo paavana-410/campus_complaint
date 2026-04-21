@@ -2,6 +2,9 @@ const request = require('supertest');
 const app = require('../app');
 const mongoose = require('mongoose');
 
+// Mock environment variables for CI
+process.env.JWT_SECRET = 'test_secret_key';
+
 describe('Server API Endpoints', () => {
   // Test the basic /api/test endpoint
   it('should return 200 for GET /api/test', async () => {
