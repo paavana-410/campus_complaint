@@ -33,6 +33,11 @@ jobs:
           npm install --legacy-peer-deps
           npm run test:coverage
           
+      - name: Remove coverage HTML reports
+        run: |
+          rm -rf server/coverage/lcov-report
+          rm -rf client/coverage/lcov-report
+
       - name: SonarCloud Scan
         # continue-on-error: true means existing issues won't BLOCK the pipeline.
         # Sonar still runs and reports — you can review issues on SonarCloud UI
