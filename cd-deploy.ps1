@@ -16,8 +16,8 @@
 
 param(
     [string]$DockerUser = 'paavana26',
-    [ValidateSet('staging','production')]
-    [string]$Namespace  = 'production'
+    [ValidateSet('staging', 'production')]
+    [string]$Namespace = 'production'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -25,13 +25,14 @@ $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Namespace-specific settings
 if ($Namespace -eq 'staging') {
-    $AppUrl    = 'http://staging.campus.local'
-    $BgColor   = 'DarkYellow'
-    $EnvLabel  = 'STAGING'
-} else {
-    $AppUrl    = 'http://campus.local'
-    $BgColor   = 'Green'
-    $EnvLabel  = 'PRODUCTION'
+    $AppUrl = 'http://staging.campus.local'
+    $BgColor = 'DarkYellow'
+    $EnvLabel = 'STAGING'
+}
+else {
+    $AppUrl = 'http://campus.local'
+    $BgColor = 'Green'
+    $EnvLabel = 'PRODUCTION'
 }
 
 # -- Banner ----------------------------------------------------
@@ -51,18 +52,39 @@ if ($minikubeStatus -notmatch 'Running') {
     Write-Host '  Minikube is NOT running. Starting it...' -ForegroundColor Red
     minikube start --memory=2500 --cpus=2
     if ($LASTEXITCODE -ne 0) { Write-Host '  ERROR: Could not start Minikube.' -ForegroundColor Red; exit 1 }
-} else {
+}
+else {
     Write-Host '  Minikube is running.' -ForegroundColor Green
+}
+
+# -- Step 1.5: Ensure Ingress Addon is enabled -----------------
+Write-Host ''
+Write-Host '[1.5/6] Ensuring Ingress addon is enabled...' -ForegroundColor Yellow
+minikube addons enable ingress
+if ($LASTEXITCODE -ne 0) { Write-Host '  ERROR: Could not enable ingress addon.' -ForegroundColor Red; exit 1 }
+
+Write-Host '  Waiting for Ingress Controller to be ready...' -ForegroundColor White
+kubectl rollout status deployment ingress-nginx-controller -n ingress-nginx --timeout=120s
+if ($LASTEXITCODE -ne 0) {
+    Write-Host '  WARNING: Ingress controller is taking long to start. This might cause connection errors.' -ForegroundColor DarkYellow
+}
+else {
+    Write-Host '  Ingress Controller is ready.' -ForegroundColor Green
 }
 
 # -- Step 2: Ensure namespace exists --------------------------
 Write-Host ''
 Write-Host "[2/6] Ensuring namespace '$Namespace' exists..." -ForegroundColor Yellow
+$OldErrorAction = $ErrorActionPreference
+$ErrorActionPreference = 'SilentlyContinue'
 $nsExists = kubectl get namespace $Namespace 2>&1
+$ErrorActionPreference = $OldErrorAction
+
 if ($LASTEXITCODE -ne 0) {
     kubectl create namespace $Namespace
     Write-Host "  Namespace '$Namespace' created." -ForegroundColor Green
-} else {
+}
+else {
     Write-Host "  Namespace '$Namespace' already exists." -ForegroundColor Green
 }
 
@@ -96,7 +118,8 @@ kubectl apply -f "$ProjectRoot\k8s\client-service.yaml"    -n $Namespace
 # Apply namespace-specific ingress
 if ($Namespace -eq 'staging') {
     kubectl apply -f "$ProjectRoot\k8s\ingress-staging.yaml" -n $Namespace
-} else {
+}
+else {
     kubectl apply -f "$ProjectRoot\k8s\ingress.yaml" -n $Namespace
 }
 Write-Host '  Manifests applied.' -ForegroundColor Green
@@ -145,7 +168,8 @@ if ($Namespace -eq 'staging') {
     Write-Host "  TEST YOUR CHANGES AT: $AppUrl" -ForegroundColor DarkYellow
     Write-Host '  Then promote to production with:' -ForegroundColor Yellow
     Write-Host '    .\cd-deploy.ps1 -Namespace production' -ForegroundColor White
-} else {
+}
+else {
     Write-Host '  If minikube tunnel is not running, open a new' -ForegroundColor Yellow
     Write-Host '     terminal and run:  minikube tunnel' -ForegroundColor Yellow
 }

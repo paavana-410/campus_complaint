@@ -19,6 +19,8 @@ spec:
       - name: client
         image: paavana26/campus-client:latest
         imagePullPolicy: Always
+        securityContext:
+          runAsUser: 0
         ports:
         - containerPort: 80
         resources:
