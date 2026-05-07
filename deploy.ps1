@@ -17,10 +17,10 @@ Write-Host ""
 
 # Step 1: Start Minikube
 Write-Host "[1/7] Checking Minikube status..." -ForegroundColor Yellow
-$minikubeStatus = minikube status --format='{{.Host}}' 2>&1
+$minikubeStatus = minikube status -p campus --format='{{.Host}}' 2>&1
 if ($minikubeStatus -notmatch "Running") {
     Write-Host "  Starting Minikube..." -ForegroundColor White
-    minikube start --driver=docker --memory=2500 --cpus=2 --docker-opt dns=8.8.8.8 --docker-opt dns=8.8.4.4
+    minikube start -p campus --driver=docker --memory=2500 --cpus=2 --docker-opt dns=8.8.8.8 --docker-opt dns=8.8.4.4
     if ($LASTEXITCODE -ne 0) {
         Write-Host "  Error: Failed to start Minikube. Exiting." -ForegroundColor Red
         exit $LASTEXITCODE
@@ -31,7 +31,7 @@ if ($minikubeStatus -notmatch "Running") {
 
 # Step 2: Enable Nginx Ingress addon
 Write-Host "[2/7] Enabling Nginx Ingress addon..." -ForegroundColor Yellow
-minikube addons enable ingress
+minikube addons enable ingress -p campus
 if ($LASTEXITCODE -ne 0) {
     Write-Host "  Error: Failed to enable ingress addon. Exiting." -ForegroundColor Red
     exit $LASTEXITCODE
@@ -41,7 +41,7 @@ Write-Host "  Ingress addon enabled." -ForegroundColor Green
 
 # Step 3: Set Docker to use Minikube's Docker daemon
 Write-Host "[3/7] Pointing Docker to Minikube daemon..." -ForegroundColor Yellow
-$dockerEnvOut = minikube -p minikube docker-env --shell powershell 2>&1
+$dockerEnvOut = minikube -p campus docker-env --shell powershell 2>&1
 if ($LASTEXITCODE -ne 0) {
     Write-Host "  Error: Failed to get docker-env from minikube. Output: $dockerEnvOut" -ForegroundColor Red
     exit 1
@@ -95,8 +95,8 @@ Write-Host "  DEPLOYMENT SUCCESSFUL!" -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "  Minikube IP:   $MINIKUBE_IP" -ForegroundColor Cyan
-Write-Host "  App URL:       http://campus.local" -ForegroundColor Cyan
-Write-Host "  Direct URL:    http://$MINIKUBE_IP" -ForegroundColor Cyan
+Write-Host "  App URL:       http://$($MINIKUBE_IP):30008" -ForegroundColor Cyan
+Write-Host "  (Access via NodePort for demonstration)" -ForegroundColor DarkCyan
 Write-Host ""
 Write-Host "  ACTION REQUIRED - Add this line to your hosts file:" -ForegroundColor Yellow
 Write-Host "  File: C:\Windows\System32\drivers\etc\hosts" -ForegroundColor Yellow
@@ -115,5 +115,4 @@ Write-Host ""
 Write-Host "  Ingress:" -ForegroundColor Yellow
 kubectl get ingress
 Write-Host ""
-Write-Host "  Run .\monitoring.ps1 to install Prometheus + Grafana" -ForegroundColor DarkCyan
 Write-Host "============================================================" -ForegroundColor Green

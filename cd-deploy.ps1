@@ -46,11 +46,11 @@ Write-Host ''
 # -- Step 1: Verify Minikube is running -----------------------
 Write-Host '[1/6] Checking Minikube status...' -ForegroundColor Yellow
 $ErrorActionPreference = 'Continue'
-$minikubeStatus = minikube status --format='{{.Host}}' 2>&1
+$minikubeStatus = minikube status -p campus --format='{{.Host}}' 2>&1
 $ErrorActionPreference = 'Stop'
 if ($minikubeStatus -notmatch 'Running') {
     Write-Host '  Minikube is NOT running. Starting it...' -ForegroundColor Red
-    minikube start --memory=2500 --cpus=2
+    minikube start -p campus --memory=2500 --cpus=2
     if ($LASTEXITCODE -ne 0) { Write-Host '  ERROR: Could not start Minikube.' -ForegroundColor Red; exit 1 }
 }
 else {
@@ -60,7 +60,7 @@ else {
 # -- Step 1.5: Ensure Ingress Addon is enabled -----------------
 Write-Host ''
 Write-Host '[1.5/6] Ensuring Ingress addon is enabled...' -ForegroundColor Yellow
-minikube addons enable ingress
+minikube addons enable ingress -p campus
 if ($LASTEXITCODE -ne 0) { Write-Host '  ERROR: Could not enable ingress addon.' -ForegroundColor Red; exit 1 }
 
 Write-Host '  Waiting for Ingress Controller to be ready...' -ForegroundColor White
@@ -95,7 +95,7 @@ Write-Host "  -> $DockerUser/campus-server:latest" -ForegroundColor White
 Write-Host "  -> $DockerUser/campus-client:latest" -ForegroundColor White
 
 # Pull into Minikube's docker daemon
-$dockerEnvOut = minikube -p minikube docker-env --shell powershell 2>&1
+$dockerEnvOut = minikube -p campus docker-env --shell powershell 2>&1
 $dockerEnvOut | Invoke-Expression
 
 docker pull "$DockerUser/campus-server:latest"

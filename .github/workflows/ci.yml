@@ -56,5 +56,3 @@ jobs:
 
       - name: Verify Frontend Client Build
         run: docker build -t campus-client:test ./client
-
-

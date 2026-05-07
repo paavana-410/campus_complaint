@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  server:
+  server-service:
     build: ./server
     ports:
       - "5000:5000"
@@ -23,7 +23,7 @@ services:
     ports:
       - "3000:80"
     depends_on:
-      server:
+      server-service:
         condition: service_healthy
     restart: always
     networks:

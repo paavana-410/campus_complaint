@@ -14,10 +14,6 @@ Write-Host ""
 
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-Write-Host "Removing monitoring stack..." -ForegroundColor Yellow
-helm uninstall prometheus -n monitoring 2>&1 | Out-Null
-kubectl delete -f "$ProjectRoot\k8s\monitoring\" --ignore-not-found 2>&1 | Out-Null
-
 Write-Host "Removing app manifests..." -ForegroundColor Yellow
 kubectl delete -f "$ProjectRoot\k8s\ingress.yaml" --ignore-not-found 2>&1 | Out-Null
 kubectl delete -f "$ProjectRoot\k8s\client-deployment.yaml" --ignore-not-found 2>&1 | Out-Null
