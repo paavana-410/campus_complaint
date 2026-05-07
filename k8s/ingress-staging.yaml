@@ -4,7 +4,7 @@ metadata:
   name: campus-ingress-staging
   namespace: staging
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: nginx
   rules:
@@ -12,6 +12,13 @@ spec:
       http:
         paths:
           - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: server-service
+                port:
+                  number: 5000
+          - path: /uploads
             pathType: Prefix
             backend:
               service:

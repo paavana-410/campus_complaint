@@ -4,7 +4,7 @@ FROM node:18-alpine AS build
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
 
@@ -20,9 +20,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy built React files
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
-# Switch to non-root user (nginx image provides 'nginx' user)
-USER nginx
-
+# EXPOSE 80 (implicitly as root)
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

@@ -13,18 +13,15 @@ spec:
     metadata:
       labels:
         app: server
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "5000"
-        prometheus.io/path: "/metrics"
     spec:
       automountServiceAccountToken: false
       containers:
       - name: server
         image: paavana26/campus-server:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000
+        env:
         envFrom:
         - secretRef:
             name: campus-secrets
@@ -43,14 +40,16 @@ spec:
             port: 5000
           initialDelaySeconds: 30
           periodSeconds: 15
-          failureThreshold: 3
+          timeoutSeconds: 5
+          failureThreshold: 5
         readinessProbe:
           httpGet:
             path: /api/test
             port: 5000
           initialDelaySeconds: 15
           periodSeconds: 10
-          failureThreshold: 3
+          timeoutSeconds: 5
+          failureThreshold: 5
         volumeMounts:
         - name: uploads-storage
           mountPath: /usr/src/app/uploads

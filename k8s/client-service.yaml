@@ -5,7 +5,7 @@ metadata:
   labels:
     app: client
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: client
   ports:
@@ -13,3 +13,4 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 80
+      nodePort: 30008
