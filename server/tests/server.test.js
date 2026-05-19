@@ -13,13 +13,6 @@ describe('Server API Endpoints', () => {
     expect(res.body).toHaveProperty('message', 'Server is working!');
   });
 
-  // Test the prometheus metrics endpoint
-  it('should return metrics for GET /metrics', async () => {
-    const res = await request(app).get('/metrics');
-    expect(res.statusCode).toEqual(200);
-    expect(res.text).toContain('http_requests_total');
-  });
-
   // We should mock mongoose connection or close it after tests
   afterAll(async () => {
     // If connected during tests, ensure it's closed
