@@ -6,9 +6,9 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 WORKDIR /usr/src/app
 RUN chown appuser:appgroup /usr/src/app
 
+COPY package*.json ./
+RUN npm install --omit=dev
 COPY --chown=appuser:appgroup . .
-# Skip npm install to bypass network issues
-
 # Remove .env from image if it leaked in (use k8s secrets instead)
 RUN rm -f .env
 

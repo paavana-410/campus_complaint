@@ -8,6 +8,10 @@ minikube start --driver=docker --cpus=4 --memory=3400
 Write-Host "3. Enabling Ingress addon..."
 minikube addons enable ingress
 
+Write-Host "3.5 Building Docker images inside Minikube..."
+minikube image build -t docker.io/paavana26/campus-server:latest ./server
+minikube image build -t docker.io/paavana26/campus-client:latest ./client
+
 Write-Host "4. Applying Secrets..."
 kubectl apply -f k8s/secret.yaml
 

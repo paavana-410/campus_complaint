@@ -94,9 +94,15 @@ Write-Host '[3/6] Pulling latest images from Docker Hub into Minikube...' -Foreg
 Write-Host "  -> $DockerUser/campus-server:latest" -ForegroundColor White
 Write-Host "  -> $DockerUser/campus-client:latest" -ForegroundColor White
 
-# Pull into Minikube's docker daemon
+# Set Minikube docker env variables securely without Invoke-Expression
 $dockerEnvOut = minikube -p campus docker-env --shell powershell 2>&1
-$dockerEnvOut | Invoke-Expression
+foreach ($line in $dockerEnvOut) {
+    if ($line -match '^\$Env:(\w+)\s*=\s*"(.*)"') {
+        $name = $Matches[1]
+        $val = $Matches[2]
+        Set-Item -Path "Env:\$name" -Value $val
+    }
+}
 
 docker pull "$DockerUser/campus-server:latest"
 if ($LASTEXITCODE -ne 0) { Write-Host '  ERROR: Failed to pull campus-server.' -ForegroundColor Red; exit 1 }

@@ -319,7 +319,7 @@ const Home = ({ userEmail, userRole }) => {
                     </div>
 
                     <div className="mb-3">
-                      {[...new Array(5)].map((_, i) => (
+                      {Array.from({ length: 5 }).map((_, i) => (
                         <i
                           key={i}
                           className={`fas fa-star ${

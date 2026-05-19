@@ -20,11 +20,8 @@ const allowedOrigins = process.env.NODE_ENV === 'production'
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
+        // Allow all origins for dynamic tunnels and classroom demonstrations
+        callback(null, true);
     },
     credentials: true,
 }));

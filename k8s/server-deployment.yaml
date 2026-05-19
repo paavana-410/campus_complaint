@@ -21,7 +21,6 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
-        env:
         envFrom:
         - secretRef:
             name: campus-secrets
