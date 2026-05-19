@@ -17,7 +17,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: server
-        image: paavana26/campus-server:latest
+        image: docker.io/paavana26/campus-server:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 5000

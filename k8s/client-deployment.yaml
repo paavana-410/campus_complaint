@@ -17,7 +17,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: client
-        image: paavana26/campus-client:latest
+        image: docker.io/paavana26/campus-client:latest
         imagePullPolicy: Never
         securityContext:
           runAsUser: 0
