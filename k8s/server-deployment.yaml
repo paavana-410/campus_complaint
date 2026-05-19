@@ -18,7 +18,7 @@ spec:
       containers:
       - name: server
         image: paavana26/campus-server:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         ports:
         - containerPort: 5000
         env:
